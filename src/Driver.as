@@ -1,51 +1,38 @@
 package  
 {
-	import avdw.math.vector2d.Vec2Const;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import net.avdw.image.convertToGrayscale;
+	import net.avdw.image.filterColor;
+	import net.avdw.image.filterGray;
+	import net.avdw.image.filterSepia;
 	/**
 	 * ...
 	 * @author Andrew van der Westhuizen
 	 */
 	public class Driver extends Sprite
 	{
-		private var ballSpeedY:int = 1;
-		private var ballRadius:int = 10;
-		private var g:int = 3;
-		private var time:int = 1;
-		private var ball:Sprite;
-		
-		private var vy:int = 0;
-		private var ay:int = 3;
-		
-		private var velocity:Vec2Const = new Vec2Const();
+		[Embed(source = "../../Images/monster.png")]
+		private const Monster:Class;
 		
 		public function Driver() 
 		{
-			ball = new Sprite();
-			ball.x = stage.stageWidth / 2;
-			ball.y = ballRadius;
-			ball.graphics.beginFill(0xFF0000);
-			ball.graphics.drawCircle(0, 0, ballRadius);
-			ball.graphics.endFill();
-			addChild(ball);
+			var bmp1:Bitmap = new Monster();
+			var bmp2:Bitmap = new Monster();
+			var bmp3:Bitmap = new Monster();
 			
-			addEventListener(Event.ENTER_FRAME, update);
-		}
-		
-		private function update(e:Event):void 
-		{
-			vy += ay;
-			ball.y += vy;
+			bmp2.x = bmp1.width;
+			bmp3.x = bmp2.x + bmp2.width;
 			
-			if (ball.y + ballRadius > stage.stageHeight) {
-				vy = -vy * 0.90;
-				ball.y = stage.stageHeight - ballRadius;
-			} else if (ball.y -ballRadius < 0) {
-			}
+			addChild(bmp1);
+			addChild(bmp2);
+			addChild(bmp3);
+			
+			//colorImageGray(bmp.bitmapData);
+			filterColor(bmp2.bitmapData, 0xD8C3FA);
+			filterSepia(bmp3.bitmapData);
+			//colorImageSepia(bmp.bitmapData);
 		}
 		
 	}

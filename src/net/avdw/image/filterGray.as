@@ -13,9 +13,9 @@ package net.avdw.image
 	 * @param	sourceRect			The clipping rectangle for the source bitmap data. No clipping will occur if not provided.
 	 * @param	destPoint			The upper left point to draw into the destination bitmap data. (0,0) will be used if not provided.
 	 */
-	public function convertToGrayscale(destBitmapData:BitmapData, sourceBitmapData:BitmapData = null, sourceRect:Rectangle = null, destPoint:Point = null):void
+	public function filterGray(destBitmapData:BitmapData, sourceBitmapData:BitmapData = null, sourceRect:Rectangle = null, destPoint:Point = null):void
 	{
-		const matrix:Array = [
+		const grayFilter:Array = [
 			0.3, 0.59, 0.11, 0, 0,
 			0.3, 0.59, 0.11, 0, 0,
 			0.3, 0.59, 0.11, 0, 0,
@@ -26,7 +26,7 @@ package net.avdw.image
 		sourceRect = (sourceRect == null) ? sourceBitmapData.rect : sourceRect;
 		destPoint = (destPoint == null) ? new Point() : destPoint;
 		
-		destBitmapData.applyFilter(sourceBitmapData, sourceRect, destPoint, new ColorMatrixFilter(matrix));
+		destBitmapData.applyFilter(sourceBitmapData, sourceRect, destPoint, new ColorMatrixFilter(grayFilter));
 	}
 
 }
