@@ -7,7 +7,16 @@ package net.avdw.image
 	
 	import net.avdw.color.extractARGB;
 	
-	public function filterColor(destBitmapData:BitmapData, color:uint, sourceBitmapData:BitmapData = null, sourceRect:Rectangle = null, destPoint:Point = null):void
+	/**
+	 * Makes a bitmap data object the color provided.
+	 * 
+	 * @param	destBitmapData		The destination bitmap data object.
+	 * @param	color				The color to make the image.
+	 * @param	sourceBitmapData	The source bitmap data where the pixel data is retrieved. The destination bitmap data will be used if not provided.
+	 * @param	sourceRect			The clipping rectangle for the source bitmap data. No clipping will occur if not provided.
+	 * @param	destPoint			The upper left point to draw the clipping into the destination bitmap data. (0,0) will be used if not provided.
+	 */
+	public function filterToColor(destBitmapData:BitmapData, color:uint, sourceBitmapData:BitmapData = null, sourceRect:Rectangle = null, destPoint:Point = null):void
 	{
 		var target:Object = extractARGB(color);
 		

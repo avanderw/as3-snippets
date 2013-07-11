@@ -4,9 +4,9 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import net.avdw.image.filterColor;
-	import net.avdw.image.filterGray;
-	import net.avdw.image.filterSepia;
+	import net.avdw.image.filterToColor;
+	import net.avdw.image.filterToSepia;
+	import net.avdw.image.filterToGray;
 	/**
 	 * ...
 	 * @author Andrew van der Westhuizen
@@ -30,8 +30,8 @@ package
 			addChild(bmp3);
 			
 			//colorImageGray(bmp.bitmapData);
-			filterColor(bmp2.bitmapData, 0xD8C3FA);
-			filterSepia(bmp3.bitmapData);
+			filterToColor(bmp2.bitmapData, 0xD8C3FA);
+			filterToGray(bmp3.bitmapData);
 			//colorImageSepia(bmp.bitmapData);
 		}
 		
