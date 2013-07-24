@@ -3,14 +3,14 @@ package net.avdw.color
 	/**
 	 * Combine four 8 bit channels into a 32 bit color.
 	 *
-	 * @param	a	The 8 bit alpha channel.
-	 * @param	r	The 8 bit red channel.
-	 * @param	g	The 8 bit green channel.
-	 * @param	b	The 8 bit blue channel.
+	 * @param	a	alpha channel intensity in the range [0:1].
+	 * @param	r	red channel intensity in the range [0:1].
+	 * @param	g	green channel intensity in the range [0:1].
+	 * @param	b	blue channel intensity in the range [0:1].
 	 * @return	A 32 bit color.
 	 */
-	public function combineARGB(a:int, r:int, g:int, b:int):uint
-	{
-		return (a << 24) | (r << 16) | (g << 8) | b;
+	public function combineARGB(a:Number, r:Number, g:Number, b:Number):uint
+	{ 
+		return (int(a * 0xFF) << 24) | (int(r * 0xFF) << 16) | (int(g * 0xFF) << 8) | int(b * 0xFF);
 	}
 }
