@@ -1,61 +1,60 @@
 package
 {
-	import avdw.math.noise.generator.CBillow2D;
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
+	import com.bit101.components.ComboBox;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	
-	import net.avdw.libnoise.noise.billowNoise;
-	import net.avdw.libnoise.noise.ridgedMultiNoise;
-	import net.avdw.libnoise.noise.perlinNoise;
-	import net.avdw.libnoise.noise.voronoiNoise;
 	import net.avdw.color.combineARGB;
+	import net.avdw.color.extractARGB;
+	import net.avdw.debug.isDebugBuild;
+	import net.avdw.debug.isDebugPlayer;
+	import net.avdw.interp.cubicEaseIn;
+	import net.avdw.number.interpolate;
+	import net.avdw.number.normalize;
+	import net.avdw.number.range;
+	import net.avdw.test.testEqual;
+	import net.avdw.test.testNotEqual;
 	
-	/**
-	 * ...
-	 * @author Andrew van der Westhuizen
-	 */
 	public class Driver extends Sprite
 	{
-		private var bmpData:BitmapData;
+		private var demoContainer:Sprite;
 		
 		public function Driver()
 		{
-			bmpData = new BitmapData(64, 64);
-			
-			if (stage) voronoi();
-			else addEventListener(Event.ADDED_TO_STAGE, voronoi);
-			
-			var bmp:Bitmap = new Bitmap(bmpData);
-			bmp.scaleX = bmp.scaleY = 4;
-			addChild(bmp);
+			if (stage)
+				init();
+			else
+				addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		private function voronoi(e:Event = null):void 
+		private function init(e:Event = null):void
 		{
-			bmpData.lock();
+			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			var seed:uint = Math.random() * 0xFF;
-			for (var y:int = 0; y < bmpData.height; y++)
-			{
-				for (var x:int = 0; x < bmpData.width; x++)
-				{
-					var xDim:Number = x / (bmpData.width - 1);
-					var yDim:Number = y / (bmpData.height - 1);
-					var zDim:Number = 5;
-					var enableDistance:Boolean = true;
-					
-					var noise:Number = voronoiNoise(xDim, yDim , zDim, seed, enableDistance, 8);
-					
-					var byte:int = (noise + 1) * 0xFF * .5;
-					var color:uint = combineARGB(255, byte, byte, byte);
-					bmpData.setPixel(x, y, color);
-				}
-			}
-			bmpData.unlock();
+			var str:String = "Quick and dirty tests:";
+			str += "\nnet.avdw.color.combineARGB:	" + testEqual(combineARGB(1, 0, 0.5, 0), 4278222592);
+			str += "\nnet.avdw.color.extractARGB:	" + testEqual(extractARGB(0xff003300).g, 0.2);
+			str += "\nnet.avdw.number.range:		" + testEqual(range(5, -2), range( -2, 5));
+			str += "\nnet.avdw.number.normalize:\t\t" + testEqual(normalize(3, -2, 6), normalize(3, 6, -2), normalize(5, 8));
+			str += "\nnet.avdw.number.interpolate:	" + testEqual(interpolate(-2, 2, 0.25), -interpolate(2, -2, 0.25));
+			str += "\nnet.avdw.number.interpolate:	" + testNotEqual(interpolate(2, -2, 0.25, cubicEaseIn), interpolate(-2, 2, 0.25), interpolate(2, -2, 0.25));
+			trace(str);
 			
+			demoContainer = new Sprite();
+			addChild(demoContainer);
+			
+			var selectorWidth:int = 200;
+			var demoSelector:ComboBox = new ComboBox(this, ((stage.stageWidth - selectorWidth) / 2), 5, "please select demo", [FilterToSepiaDemo, FilterToGrayDemo, FilterToColorDemo]);
+			demoSelector.width = selectorWidth;
+			demoSelector.addEventListener(Event.SELECT, showDemo);
+			addChild(demoSelector);
 		}
-	
+		
+		private function showDemo(e:Event):void
+		{
+			if (demoContainer.numChildren != 0)
+				demoContainer.removeChildren();
+			if (e.target.selectedItem != null)
+				demoContainer.addChild(new e.target.selectedItem());
+		}
 	}
 }

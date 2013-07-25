@@ -1,4 +1,4 @@
-package net.avdw.image 
+package net.avdw.image.filter 
 {
 	import flash.display.BitmapData;
 	import flash.filters.ColorMatrixFilter;
