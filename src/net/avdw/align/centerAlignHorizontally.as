@@ -25,7 +25,7 @@ package net.avdw.align
 			if (withinObject is Stage)
 				objectsToPosition[i].x = (withinObject.stageWidth - objectsToPosition[i].width) / 2;
 			else
-				objectsToPosition[i].x = withinObject.x + (withinObject.width - objectsToPosition[i].width) / 2;
+				objectsToPosition[i].x = tmpWithinObject.x + (tmpWithinObject.width - objectsToPosition[i].width) / 2;
 		}
 	}
 }
