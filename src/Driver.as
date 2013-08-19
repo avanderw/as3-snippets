@@ -43,7 +43,7 @@ package
 			addChild(demoContainer);
 			
 			var selectorWidth:int = 200;
-			var demoSelector:ComboBox = new ComboBox(this, ((stage.stageWidth - selectorWidth) / 2), 5, "please select demo", [FilterToSepiaDemo, FilterToGrayDemo, FilterToColorDemo]);
+			var demoSelector:ComboBox = new ComboBox(this, ((stage.stageWidth - selectorWidth) / 2), 5, "please select demo", [FilterToSepiaDemo, FilterToGrayDemo, FilterToColorDemo, CollisionDemo]);
 			demoSelector.width = selectorWidth;
 			demoSelector.addEventListener(Event.SELECT, showDemo);
 			addChild(demoSelector);
