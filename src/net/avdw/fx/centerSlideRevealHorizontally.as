@@ -2,9 +2,9 @@ package net.avdw.fx
 {
 	import flash.display.DisplayObject;
 	
-	public function centerSlideRevealHorizontally(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null):void
+	public function centerSlideRevealHorizontally(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
 	{
-		new FxControl(displayObject, effectMillis, interp);
+		new FxControl(displayObject, effectMillis, interp, callback);
 	}
 }
 
@@ -25,6 +25,7 @@ class FxControl
 	private var displayObject:DisplayObject;
 	private var effectMillis:int;
 	private var lastMillis:int;
+	private var callback:Function;
 	private var interp:Function;
 	private var fxBmp:Bitmap;
 	
@@ -35,8 +36,9 @@ class FxControl
 	private var pointA:Point;
 	private var pointB:Point;
 	
-	public function FxControl(displayObject:DisplayObject, effectMillis:int, interp:Function)
+	public function FxControl(displayObject:DisplayObject, effectMillis:int, interp:Function, callback:Function)
 	{
+		this.callback = callback;
 		this.interp = interp;
 		this.effectMillis = effectMillis;
 		this.displayObject = displayObject;
@@ -76,6 +78,9 @@ class FxControl
 			displayObject.visible = true;
 			
 			fxBmp.removeEventListener(Event.ENTER_FRAME, animate);
+			
+			if (callback != null)
+				callback();
 		}
 	}
 	

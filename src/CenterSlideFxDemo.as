@@ -10,7 +10,7 @@ package
 	import net.avdw.fx.centerSlideRevealHorizontally;
 	import net.avdw.fx.centerSlideHideVertically;
 	import net.avdw.fx.centerSlideHideHorizontally;
-	import net.avdw.interp.expoEaseOut;
+	import net.avdw.interp.quadEaseInOut;
 	
 	/**
 	 * ...
@@ -22,6 +22,10 @@ package
 		private const CardClass:Class;
 		private var cardBmp:Bitmap;
 		private var cardContainer:Sprite;
+		private var hideHorizontallyBtn:PushButton;
+		private var hideVerticallyBtn:PushButton;
+		private var revealHorizontallyBtn:PushButton;
+		private var revealVerticallyBtn:PushButton;
 		
 		public function CenterSlideFxDemo()
 		{
@@ -54,24 +58,54 @@ package
 			cardContainer.x = stage.stageWidth >> 1;
 			cardContainer.y = stage.stageHeight >> 1;
 			
-			var revealVerticallyBtn:PushButton = new PushButton(this, 0, 0, "Reveal Vertically", function():void
+			var duration:int = 1500;
+			var interp:Function = quadEaseInOut;
+			revealVerticallyBtn = new PushButton(this, 0, 0, "Reveal Vertically", function():void
 				{
-					centerSlideRevealVertically(cardBmp);
+					centerSlideRevealVertically(cardBmp, duration, interp, revealComplete);
+					hideAll();
 				});
-			var revealHorizontallyBtn:PushButton = new PushButton(this, 0, 0, "Reveal Horizontally", function():void
+			revealHorizontallyBtn = new PushButton(this, 0, 0, "Reveal Horizontally", function():void
 				{
-					centerSlideRevealHorizontally(cardBmp);
+					centerSlideRevealHorizontally(cardBmp, duration, interp, revealComplete);
+					hideAll();
 				});
-			var hideVerticallyBtn:PushButton = new PushButton(this, 0, 0, "Hide Vertically", function():void
+			hideVerticallyBtn = new PushButton(this, 0, 0, "Hide Vertically", function():void
 				{
-					centerSlideHideVertically(cardBmp);
+					centerSlideHideVertically(cardBmp, duration, interp, hideComplete);
+					hideAll();
 				});
-			var hideHorizontallyBtn:PushButton = new PushButton(this, 0, 0, "Hide Horizontally", function():void
+			hideHorizontallyBtn = new PushButton(this, 0, 0, "Hide Horizontally", function():void
 				{
-					centerSlideHideHorizontally(cardBmp);
+					centerSlideHideHorizontally(cardBmp, duration, interp, hideComplete);
+					hideAll();
 				});
 			
+			revealVerticallyBtn.y = (stage.stageHeight >> 1) - revealVerticallyBtn.height * 2 - 10;
 			spaceVertically([revealVerticallyBtn, revealHorizontallyBtn, hideVerticallyBtn, hideHorizontallyBtn], 5);
+			
+			revealHorizontallyBtn.visible = false;
+			revealVerticallyBtn.visible = false;
+		}
+		
+		private function hideAll():void
+		{
+			revealHorizontallyBtn.visible = false;
+			revealVerticallyBtn.visible = false;
+			hideHorizontallyBtn.visible = false;
+			hideVerticallyBtn.visible = false;
+		}
+		
+		private function hideComplete():void
+		{
+			revealHorizontallyBtn.visible = true;
+			revealVerticallyBtn.visible = true;
+		}
+		
+		private function revealComplete():void
+		{
+			hideHorizontallyBtn.visible = true;
+			hideVerticallyBtn.visible = true;
 		}
 	
 	}

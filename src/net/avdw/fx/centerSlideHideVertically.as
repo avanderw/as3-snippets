@@ -2,9 +2,9 @@ package net.avdw.fx
 {
 	import flash.display.DisplayObject;
 	
-	public function centerSlideHideVertically(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null):void
+	public function centerSlideHideVertically(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
 	{
-		new FxControl(displayObject, effectMillis, interp);
+		new FxControl(displayObject, effectMillis, interp, callback);
 	}
 }
 
@@ -34,9 +34,11 @@ class FxControl
 	private var sideBClipRect:Rectangle;
 	private var pointA:Point;
 	private var pointB:Point;
+	private var callback:Function;
 	
-	public function FxControl(displayObject:DisplayObject, effectMillis:int, interp:Function)
+	public function FxControl(displayObject:DisplayObject, effectMillis:int, interp:Function, callback:Function)
 	{
+		this.callback = callback;
 		this.interp = interp;
 		this.effectMillis = effectMillis;
 		this.displayObject = displayObject;
@@ -78,6 +80,9 @@ class FxControl
 			//displayObject.visible = true;
 			
 			fxBmp.removeEventListener(Event.ENTER_FRAME, animate);
+			
+			if (callback != null)
+				callback();
 		}
 	}	
 	
