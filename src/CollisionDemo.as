@@ -19,9 +19,9 @@ package
 	 */
 	public class CollisionDemo extends Sprite
 	{
-		[Embed(source="../../images/yoda.png")]
+		[Embed(source="../../images/256x256 Yoda.png")]
 		private const YodaClass:Class;
-		[Embed(source="../../images/monster.png")]
+		[Embed(source="../../images/256x256 Monster.png")]
 		private const MonsterClass:Class
 		
 		private var debugBmp:Bitmap;

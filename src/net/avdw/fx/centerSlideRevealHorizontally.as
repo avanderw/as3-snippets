@@ -64,6 +64,8 @@ class FxControl
 	
 	private function animate(e:Event):void
 	{
+		fxBmp.bitmapData.fillRect(fxBmp.bitmapData.rect, 0x0);
+		
 		var progress:Number = normalize(getTimer() - lastMillis, effectMillis);
 		animateRectangles(interp(progress) * halfway);
 		

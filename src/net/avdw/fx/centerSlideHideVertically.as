@@ -77,7 +77,6 @@ class FxControl
 		{
 			fxBmp.bitmapData.dispose();
 			displayObject.parent.removeChild(fxBmp);
-			//displayObject.visible = true;
 			
 			fxBmp.removeEventListener(Event.ENTER_FRAME, animate);
 			

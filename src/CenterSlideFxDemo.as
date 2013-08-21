@@ -1,16 +1,19 @@
 package
 {
+	import com.bit101.components.ComboBox;
 	import com.bit101.components.PushButton;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
+	import net.avdw.align.centerAlignHorizontally;
 	import net.avdw.align.spaceVertically;
 	import net.avdw.fx.centerSlideRevealVertically;
 	import net.avdw.fx.centerSlideRevealHorizontally;
 	import net.avdw.fx.centerSlideHideVertically;
 	import net.avdw.fx.centerSlideHideHorizontally;
-	import net.avdw.interp.quadEaseInOut;
+	
+	import net.avdw.interp.*;
 	
 	/**
 	 * ...
@@ -59,30 +62,36 @@ package
 			cardContainer.y = stage.stageHeight >> 1;
 			
 			var duration:int = 1500;
-			var interp:Function = quadEaseInOut;
+			var comboBox:ComboBox = new ComboBox(this, 0, 0, "interp", 
+			[ { label:"quadEaseInOut", value:quadEaseInOut }, { label:"backEaseInOut", value:backEaseInOut }, { label:"circEaseInOut", value:circEaseInOut }
+			, { label:"cubicEaseInOut", value:cubicEaseInOut }, { label:"bounceEaseInOut", value:bounceEaseInOut }, { label:"elasticEaseInOut", value:elasticEaseInOut } ]
+			);
+			comboBox.selectedIndex = 0;
+			
 			revealVerticallyBtn = new PushButton(this, 0, 0, "Reveal Vertically", function():void
 				{
-					centerSlideRevealVertically(cardBmp, duration, interp, revealComplete);
+					centerSlideRevealVertically(cardBmp, duration, comboBox.selectedItem.value as Function, revealComplete);
 					hideAll();
 				});
 			revealHorizontallyBtn = new PushButton(this, 0, 0, "Reveal Horizontally", function():void
 				{
-					centerSlideRevealHorizontally(cardBmp, duration, interp, revealComplete);
+					centerSlideRevealHorizontally(cardBmp, duration, comboBox.selectedItem.value as Function, revealComplete);
 					hideAll();
 				});
 			hideVerticallyBtn = new PushButton(this, 0, 0, "Hide Vertically", function():void
 				{
-					centerSlideHideVertically(cardBmp, duration, interp, hideComplete);
+					centerSlideHideVertically(cardBmp, duration, comboBox.selectedItem.value as Function, hideComplete);
 					hideAll();
 				});
 			hideHorizontallyBtn = new PushButton(this, 0, 0, "Hide Horizontally", function():void
 				{
-					centerSlideHideHorizontally(cardBmp, duration, interp, hideComplete);
+					centerSlideHideHorizontally(cardBmp, duration, comboBox.selectedItem.value as Function, hideComplete);
 					hideAll();
 				});
 			
 			revealVerticallyBtn.y = (stage.stageHeight >> 1) - revealVerticallyBtn.height * 2 - 10;
 			spaceVertically([revealVerticallyBtn, revealHorizontallyBtn, hideVerticallyBtn, hideHorizontallyBtn], 5);
+			centerAlignHorizontally([comboBox], stage);
 			
 			revealHorizontallyBtn.visible = false;
 			revealVerticallyBtn.visible = false;

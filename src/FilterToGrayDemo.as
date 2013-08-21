@@ -8,7 +8,7 @@ package
 	public class FilterToGrayDemo extends Sprite
 	{
 		
-		[Embed(source="../../images/monster.png")]
+		[Embed(source="../../images/256x256 Monster.png")]
 		private const ImageClass:Class;
 		private var filteredBmp:Bitmap;
 		private var originalBmp:Bitmap;
