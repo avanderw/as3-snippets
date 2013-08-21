@@ -5,13 +5,14 @@ package
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import net.avdw.generate.generateCheckerboard;
 	
 	import net.avdw.align.centerAlignHorizontally;
 	import net.avdw.align.spaceVertically;
-	import net.avdw.fx.centerSlideRevealVertically;
-	import net.avdw.fx.centerSlideRevealHorizontally;
-	import net.avdw.fx.centerSlideHideVertically;
-	import net.avdw.fx.centerSlideHideHorizontally;
+	import net.avdw.fx.centerSlideFxRevealVertically;
+	import net.avdw.fx.centerSlideFxRevealHorizontally;
+	import net.avdw.fx.centerSlideFxHideVertically;
+	import net.avdw.fx.centerSlideFxHideHorizontally;
 	
 	import net.avdw.interp.*;
 	
@@ -58,6 +59,8 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
 			
+			addChildAt(new Bitmap(generateCheckerboard(stage.stageWidth, stage.stageHeight)), 0);
+			
 			cardContainer.x = stage.stageWidth >> 1;
 			cardContainer.y = stage.stageHeight >> 1;
 			
@@ -70,22 +73,22 @@ package
 			
 			revealVerticallyBtn = new PushButton(this, 0, 0, "Reveal Vertically", function():void
 				{
-					centerSlideRevealVertically(cardBmp, duration, comboBox.selectedItem.value as Function, revealComplete);
+					centerSlideFxRevealVertically(cardBmp, duration, comboBox.selectedItem.value as Function, revealComplete);
 					hideAll();
 				});
 			revealHorizontallyBtn = new PushButton(this, 0, 0, "Reveal Horizontally", function():void
 				{
-					centerSlideRevealHorizontally(cardBmp, duration, comboBox.selectedItem.value as Function, revealComplete);
+					centerSlideFxRevealHorizontally(cardBmp, duration, comboBox.selectedItem.value as Function, revealComplete);
 					hideAll();
 				});
 			hideVerticallyBtn = new PushButton(this, 0, 0, "Hide Vertically", function():void
 				{
-					centerSlideHideVertically(cardBmp, duration, comboBox.selectedItem.value as Function, hideComplete);
+					centerSlideFxHideVertically(cardBmp, duration, comboBox.selectedItem.value as Function, hideComplete);
 					hideAll();
 				});
 			hideHorizontallyBtn = new PushButton(this, 0, 0, "Hide Horizontally", function():void
 				{
-					centerSlideHideHorizontally(cardBmp, duration, comboBox.selectedItem.value as Function, hideComplete);
+					centerSlideFxHideHorizontally(cardBmp, duration, comboBox.selectedItem.value as Function, hideComplete);
 					hideAll();
 				});
 			

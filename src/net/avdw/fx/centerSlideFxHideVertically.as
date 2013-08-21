@@ -2,7 +2,7 @@ package net.avdw.fx
 {
 	import flash.display.DisplayObject;
 	
-	public function centerSlideHideHorizontally(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
+	public function centerSlideFxHideVertically(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
 	{
 		new FxControl(displayObject, effectMillis, interp, callback);
 	}
@@ -83,22 +83,22 @@ class FxControl
 			if (callback != null)
 				callback();
 		}
-	}
+	}	
 	
 	private function setupRectangles():void
 	{
-		halfway = pixelCache.width >> 1;
-		sideAClipRect = new Rectangle(0, 0, halfway, pixelCache.height);
-		sideBClipRect = new Rectangle(pixelCache.width, 0, halfway, pixelCache.height);
+		halfway = pixelCache.height >> 1;
+		sideAClipRect = new Rectangle(0, 0, pixelCache.width, halfway);
+		sideBClipRect = new Rectangle(0, pixelCache.height, pixelCache.width, halfway);
 		pointA = new Point(0, 0);
-		pointB = new Point(halfway, 0);
+		pointB = new Point(0, halfway);
 	}
 	
 	private function animateRectangles(pixels:int):void
 	{
-		sideAClipRect.width = sideBClipRect.width = pixels;
-		pointA.x = halfway - sideAClipRect.width;
-		sideBClipRect.x = pixelCache.width - sideBClipRect.width;
+		sideAClipRect.height = sideBClipRect.height = pixels;
+		pointA.y = halfway - sideAClipRect.height;
+		sideBClipRect.y = pixelCache.height - sideBClipRect.height;
 	}
 
 }

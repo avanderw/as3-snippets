@@ -2,7 +2,7 @@ package net.avdw.fx
 {
 	import flash.display.DisplayObject;
 	
-	public function centerSlideHideVertically(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
+	public function centerSlideFxRevealVertically(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
 	{
 		new FxControl(displayObject, effectMillis, interp, callback);
 	}
@@ -67,7 +67,7 @@ class FxControl
 		fxBmp.bitmapData.fillRect(fxBmp.bitmapData.rect, 0x0);
 		
 		var progress:Number = normalize(getTimer() - lastMillis, effectMillis);
-		animateRectangles(halfway - interp(progress) * halfway);
+		animateRectangles(interp(progress) * halfway);
 		
 		fxBmp.bitmapData.copyPixels(pixelCache, sideAClipRect, pointA);
 		fxBmp.bitmapData.copyPixels(pixelCache, sideBClipRect, pointB);
@@ -77,20 +77,21 @@ class FxControl
 		{
 			fxBmp.bitmapData.dispose();
 			displayObject.parent.removeChild(fxBmp);
+			displayObject.visible = true;
 			
 			fxBmp.removeEventListener(Event.ENTER_FRAME, animate);
 			
 			if (callback != null)
 				callback();
 		}
-	}	
+	}
 	
 	private function setupRectangles():void
 	{
 		halfway = pixelCache.height >> 1;
-		sideAClipRect = new Rectangle(0, 0, pixelCache.width, halfway);
-		sideBClipRect = new Rectangle(0, pixelCache.height, pixelCache.width, halfway);
-		pointA = new Point(0, 0);
+		sideAClipRect = new Rectangle(0, 0, pixelCache.width, 0);
+		sideBClipRect = new Rectangle(0, pixelCache.height, pixelCache.width, 0);
+		pointA = new Point(0, halfway);
 		pointB = new Point(0, halfway);
 	}
 	

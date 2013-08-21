@@ -2,7 +2,7 @@ package net.avdw.fx
 {
 	import flash.display.DisplayObject;
 	
-	public function centerSlideRevealVertically(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
+	public function centerSlideFxRevealHorizontally(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
 	{
 		new FxControl(displayObject, effectMillis, interp, callback);
 	}
@@ -25,6 +25,7 @@ class FxControl
 	private var displayObject:DisplayObject;
 	private var effectMillis:int;
 	private var lastMillis:int;
+	private var callback:Function;
 	private var interp:Function;
 	private var fxBmp:Bitmap;
 	
@@ -34,7 +35,6 @@ class FxControl
 	private var sideBClipRect:Rectangle;
 	private var pointA:Point;
 	private var pointB:Point;
-	private var callback:Function;
 	
 	public function FxControl(displayObject:DisplayObject, effectMillis:int, interp:Function, callback:Function)
 	{
@@ -88,18 +88,18 @@ class FxControl
 	
 	private function setupRectangles():void
 	{
-		halfway = pixelCache.height >> 1;
-		sideAClipRect = new Rectangle(0, 0, pixelCache.width, 0);
-		sideBClipRect = new Rectangle(0, pixelCache.height, pixelCache.width, 0);
-		pointA = new Point(0, halfway);
-		pointB = new Point(0, halfway);
+		halfway = pixelCache.width >> 1;
+		sideAClipRect = new Rectangle(0, 0, 0, pixelCache.height);
+		sideBClipRect = new Rectangle(pixelCache.width, 0, 0, pixelCache.height);
+		pointA = new Point(halfway, 0);
+		pointB = new Point(halfway, 0);
 	}
 	
 	private function animateRectangles(pixels:int):void
 	{
-		sideAClipRect.height = sideBClipRect.height = pixels;
-		pointA.y = halfway - sideAClipRect.height;
-		sideBClipRect.y = pixelCache.height - sideBClipRect.height;
+		sideAClipRect.width = sideBClipRect.width = pixels;
+		pointA.x = halfway - sideAClipRect.width;
+		sideBClipRect.x = pixelCache.width - sideBClipRect.width;
 	}
 
 }

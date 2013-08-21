@@ -2,7 +2,7 @@ package net.avdw.fx
 {
 	import flash.display.DisplayObject;
 	
-	public function centerSlideRevealHorizontally(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
+	public function centerSlideFxHideHorizontally(displayObject:DisplayObject, effectMillis:int = 1000, interp:Function = null, callback:Function = null):void
 	{
 		new FxControl(displayObject, effectMillis, interp, callback);
 	}
@@ -25,7 +25,6 @@ class FxControl
 	private var displayObject:DisplayObject;
 	private var effectMillis:int;
 	private var lastMillis:int;
-	private var callback:Function;
 	private var interp:Function;
 	private var fxBmp:Bitmap;
 	
@@ -35,6 +34,7 @@ class FxControl
 	private var sideBClipRect:Rectangle;
 	private var pointA:Point;
 	private var pointB:Point;
+	private var callback:Function;
 	
 	public function FxControl(displayObject:DisplayObject, effectMillis:int, interp:Function, callback:Function)
 	{
@@ -67,7 +67,7 @@ class FxControl
 		fxBmp.bitmapData.fillRect(fxBmp.bitmapData.rect, 0x0);
 		
 		var progress:Number = normalize(getTimer() - lastMillis, effectMillis);
-		animateRectangles(interp(progress) * halfway);
+		animateRectangles(halfway - interp(progress) * halfway);
 		
 		fxBmp.bitmapData.copyPixels(pixelCache, sideAClipRect, pointA);
 		fxBmp.bitmapData.copyPixels(pixelCache, sideBClipRect, pointB);
@@ -77,7 +77,6 @@ class FxControl
 		{
 			fxBmp.bitmapData.dispose();
 			displayObject.parent.removeChild(fxBmp);
-			displayObject.visible = true;
 			
 			fxBmp.removeEventListener(Event.ENTER_FRAME, animate);
 			
@@ -89,9 +88,9 @@ class FxControl
 	private function setupRectangles():void
 	{
 		halfway = pixelCache.width >> 1;
-		sideAClipRect = new Rectangle(0, 0, 0, pixelCache.height);
-		sideBClipRect = new Rectangle(pixelCache.width, 0, 0, pixelCache.height);
-		pointA = new Point(halfway, 0);
+		sideAClipRect = new Rectangle(0, 0, halfway, pixelCache.height);
+		sideBClipRect = new Rectangle(pixelCache.width, 0, halfway, pixelCache.height);
+		pointA = new Point(0, 0);
 		pointB = new Point(halfway, 0);
 	}
 	
