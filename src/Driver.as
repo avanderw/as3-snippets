@@ -12,6 +12,9 @@ package
 	import net.avdw.number.normalize;
 	import net.avdw.number.range;
 	import net.avdw.dice.roll;
+	import net.avdw.random.randomRealFemaleName;
+	import net.avdw.random.randomRealLastName;
+	import net.avdw.random.randomRealMaleName;
 	import net.avdw.test.testEqual;
 	import net.avdw.test.testNotEqual;
 	import net.avdw.test.testSmallerThan;
@@ -35,11 +38,12 @@ package
 			var str:String = "Quick and dirty tests:";
 			str += "\nnet.avdw.color.combineARGB:	" + testEqual(combineARGB(1, 0, 0.5, 0), 4278222592);
 			str += "\nnet.avdw.color.extractARGB:	" + testEqual(extractARGB(0xff003300).g, 0.2);
-			str += "\nnet.avdw.number.range:		" + testEqual(range(5, -2), range( -2, 5));
+			str += "\nnet.avdw.number.range:		" + testEqual(range(5, -2), range(-2, 5));
 			str += "\nnet.avdw.number.normalize:\t\t" + testEqual(normalize(3, -2, 6), normalize(3, 6, -2), normalize(5, 8));
 			str += "\nnet.avdw.number.interpolate:	" + testEqual(interpolate(-2, 2, 0.25), -interpolate(2, -2, 0.25));
-			str += "\nnet.avdw.number.interpolate:	" + testNotEqual(interpolate(2, -2, 0.25, cubicEaseIn), interpolate( -2, 2, 0.25), interpolate(2, -2, 0.25));
+			str += "\nnet.avdw.number.interpolate:	" + testNotEqual(interpolate(2, -2, 0.25, cubicEaseIn), interpolate(-2, 2, 0.25), interpolate(2, -2, 0.25));
 			str += "\nnet.avdw.dice.roll:			" + testSmallerThan(7, roll(6), roll(6), roll(6));
+			str += "\nnet.avdw.random.names:		" + randomRealMaleName() + " & " + randomRealFemaleName() + " " + randomRealLastName();
 			trace(str);
 			
 			demoContainer = new Sprite();
