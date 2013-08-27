@@ -16,8 +16,8 @@ package net.avdw.number
 			interpolationFunction = linear;
 		
 		if (startingNumber < endingNumber)
-			return Math.min(endingNumber, startingNumber) + range(endingNumber, startingNumber) * interpolationFunction(weight);
+			return Math.min(endingNumber, startingNumber) + rangeBetween(endingNumber, startingNumber) * interpolationFunction(weight);
 		else
-			return Math.max(endingNumber, startingNumber) - range(endingNumber, startingNumber) * interpolationFunction(weight);
+			return Math.max(endingNumber, startingNumber) - rangeBetween(endingNumber, startingNumber) * interpolationFunction(weight);
 	}
 }

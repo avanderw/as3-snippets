@@ -1,6 +1,6 @@
-package net.avdw.number
+package net.avdw.random
 {
-	public function randomlyOffset(baseNumber:Number, minOffset:Number, maxOffset:Number = NaN, inBothDirections:Boolean = true):Number
+	public function randomOffsetFrom(baseNumber:Number, minOffset:Number, maxOffset:Number = NaN, inBothDirections:Boolean = true):Number
 	{
 		if (inBothDirections)
 		{

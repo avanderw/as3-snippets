@@ -12,7 +12,7 @@ package net.avdw.number
 		if (isNaN(lastBound))
 			lastBound = 0;
 			
-		return (number - Math.min(firstBound, lastBound)) / range(firstBound, lastBound);
+		return (number - Math.min(firstBound, lastBound)) / rangeBetween(firstBound, lastBound);
 	}
 
 }

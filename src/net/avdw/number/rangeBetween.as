@@ -6,7 +6,7 @@ package net.avdw.number
 	 * @param	lastValue
 	 * @return a positive value indicating the range between two values
 	 */
-	public function range(firstValue:Number, lastValue:Number):Number
+	public function rangeBetween(firstValue:Number, lastValue:Number):Number
 	{
 		return Math.abs(Math.max(firstValue, lastValue) - Math.min(firstValue, lastValue));
 	}
