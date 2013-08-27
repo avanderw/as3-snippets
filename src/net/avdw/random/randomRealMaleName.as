@@ -1,11 +1,10 @@
 package net.avdw.random
 {
-	import flash.utils.ByteArray;
+	import net.avdw.file.loadTextFileLines;
 	
 	public function randomRealMaleName():String
 	{
-		var bytes:ByteArray = new Resource.MaleFirstNamesFile() as ByteArray;
-		var names:Array = bytes.toString().split(",");
+		var names:Array = loadTextFileLines(Resource.MaleFirstNamesFile);
 		
 		return names[Math.floor(Math.random() * names.length)];
 	}
@@ -13,6 +12,6 @@ package net.avdw.random
 
 class Resource
 {
-	[Embed(source="../../../../../assets/real-male-first-names.csv",mimeType="application/octet-stream")]
+	[Embed(source="../../../../../assets/text/real-male-first-names.txt",mimeType="application/octet-stream")]
 	static public const MaleFirstNamesFile:Class;
 }

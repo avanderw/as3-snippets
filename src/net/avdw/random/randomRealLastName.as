@@ -1,11 +1,9 @@
 package net.avdw.random
-{
-	import flash.utils.ByteArray;
-	
+{	
+	import net.avdw.file.loadTextFileLines;
 	public function randomRealLastName():String
 	{
-		var bytes:ByteArray = new Resource.AllLastNamesFile() as ByteArray;
-		var names:Array = bytes.toString().split(",");
+		var names:Array = loadTextFileLines(Resource.AllLastNamesFile);
 		
 		return names[Math.floor(Math.random() * names.length)];
 	}
@@ -13,6 +11,6 @@ package net.avdw.random
 
 class Resource
 {
-	[Embed(source="../../../../../assets/real-last-names.csv",mimeType="application/octet-stream")]
+	[Embed(source="../../../../../assets/text/real-last-names.txt",mimeType="application/octet-stream")]
 	static public const AllLastNamesFile:Class;
 }
