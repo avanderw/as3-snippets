@@ -11,8 +11,10 @@ package
 	import net.avdw.number.interpolate;
 	import net.avdw.number.normalize;
 	import net.avdw.number.range;
+	import net.avdw.dice.roll;
 	import net.avdw.test.testEqual;
 	import net.avdw.test.testNotEqual;
+	import net.avdw.test.testSmallerThan;
 	
 	public class Driver extends Sprite
 	{
@@ -36,7 +38,8 @@ package
 			str += "\nnet.avdw.number.range:		" + testEqual(range(5, -2), range( -2, 5));
 			str += "\nnet.avdw.number.normalize:\t\t" + testEqual(normalize(3, -2, 6), normalize(3, 6, -2), normalize(5, 8));
 			str += "\nnet.avdw.number.interpolate:	" + testEqual(interpolate(-2, 2, 0.25), -interpolate(2, -2, 0.25));
-			str += "\nnet.avdw.number.interpolate:	" + testNotEqual(interpolate(2, -2, 0.25, cubicEaseIn), interpolate(-2, 2, 0.25), interpolate(2, -2, 0.25));
+			str += "\nnet.avdw.number.interpolate:	" + testNotEqual(interpolate(2, -2, 0.25, cubicEaseIn), interpolate( -2, 2, 0.25), interpolate(2, -2, 0.25));
+			str += "\nnet.avdw.dice.roll:			" + testSmallerThan(7, roll(6), roll(6), roll(6));
 			trace(str);
 			
 			demoContainer = new Sprite();
