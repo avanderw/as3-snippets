@@ -1,11 +1,11 @@
 package net.avdw.random
 {	
-	import net.avdw.file.loadTextFileLines;
+	import net.avdw.array.randomItemFrom;
+	import net.avdw.file.loadLinesFromTextFile;
+	
 	public function randomRealLastName():String
 	{
-		var names:Array = loadTextFileLines(Resource.AllLastNamesFile);
-		
-		return names[Math.floor(Math.random() * names.length)];
+		return randomItemFrom(loadLinesFromTextFile(Resource.AllLastNamesFile));
 	}
 }
 

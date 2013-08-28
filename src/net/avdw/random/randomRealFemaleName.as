@@ -1,12 +1,11 @@
 package net.avdw.random
 {
-	import net.avdw.file.loadTextFileLines;
+	import net.avdw.array.randomItemFrom;
+	import net.avdw.file.loadLinesFromTextFile;
 	
 	public function randomRealFemaleName():String
 	{
-		var names:Array = loadTextFileLines(Resource.FemaleFirstNamesFile);
-		
-		return names[Math.floor(Math.random() * names.length)];
+		return randomItemFrom(loadLinesFromTextFile(Resource.FemaleFirstNamesFile));
 	}
 }
 
