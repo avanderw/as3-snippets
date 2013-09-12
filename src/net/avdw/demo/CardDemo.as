@@ -1,6 +1,7 @@
-package
+package net.avdw.demo
 {
 	import flash.display.Sprite;
+	import net.avdw.card.blackjackHandValue;
 	import net.avdw.card.Deck;
 	
 	/**
@@ -19,6 +20,12 @@ package
 			{
 				deck.draw();
 			}
+			
+			
+			deck:Deck = new Deck();
+			var hand:Array = deck.draw(2);
+			
+			trace(hand, blackjackHandValue(hand));
 		}
 	
 	}

@@ -1,4 +1,4 @@
-package
+package net.avdw.demo
 {
 	import com.bit101.components.ColorChooser;
 	import flash.display.Bitmap;
@@ -12,7 +12,7 @@ package
 	
 	public class FilterToColorDemo extends Sprite
 	{
-		[Embed(source="../../assets/images/256x256 Monster.png")]
+		[Embed(source="../../../../../assets/images/256x256 Monster.png")]
 		private const ImageClass:Class;
 		private var filteredBmp:Bitmap;
 		private var originalBmp:Bitmap;

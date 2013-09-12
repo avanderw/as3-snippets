@@ -1,19 +1,19 @@
-package
+package net.avdw.demo
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import net.avdw.image.filter.filterToSepia;
+	import net.avdw.image.filter.filterToGray;
 	
-	public class FilterToSepiaDemo extends Sprite
+	public class FilterToGrayDemo extends Sprite
 	{
 		
-		[Embed(source="../../assets/images/256x256 Monster.png")]
+		[Embed(source="../../../../../assets/images/256x256 Monster.png")]
 		private const ImageClass:Class;
 		private var filteredBmp:Bitmap;
 		private var originalBmp:Bitmap;
 		
-		public function FilterToSepiaDemo()
+		public function FilterToGrayDemo()
 		{
 			if (stage)
 				init();
@@ -33,7 +33,7 @@ package
 			filteredBmp.y = originalBmp.y;
 			addChild(filteredBmp);
 			
-			filterToSepia(filteredBmp.bitmapData);
+			filterToGray(filteredBmp.bitmapData);
 		}
 	
 	}

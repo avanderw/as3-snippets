@@ -1,13 +1,14 @@
 package net.avdw.random
 {
 	import net.avdw.array.randomItemFrom;
-	import net.avdw.file.loadTextFileLines;
+	import net.avdw.file.loadLinesFromTextFile;
+	
 	public function randomScenario():String
 	{
-		var settings:Array = loadTextFileLines(Resource.Settings);
-		var objectives:Array = loadTextFileLines(Resource.Objectives);
-		var antagonists:Array = loadTextFileLines(Resource.Antagonists);
-		var complications:Array = loadTextFileLines(Resource.Complications);
+		var settings:Array = loadLinesFromTextFile(Resource.Settings);
+		var objectives:Array = loadLinesFromTextFile(Resource.Objectives);
+		var antagonists:Array = loadLinesFromTextFile(Resource.Antagonists);
+		var complications:Array = loadLinesFromTextFile(Resource.Complications);
 		
 		return [randomItemFrom(settings), randomItemFrom(objectives), randomItemFrom(antagonists), randomItemFrom(complications)].join(" ");
 	}

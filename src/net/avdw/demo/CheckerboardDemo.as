@@ -1,4 +1,4 @@
-package
+package net.avdw.demo
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;

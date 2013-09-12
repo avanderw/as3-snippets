@@ -3,22 +3,14 @@ package
 	import com.bit101.components.ComboBox;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import net.avdw.color.combineARGB;
-	import net.avdw.color.extractARGB;
-	import net.avdw.debug.isDebugBuild;
-	import net.avdw.debug.isDebugPlayer;
-	import net.avdw.interp.cubicEaseIn;
-	import net.avdw.number.interpolate;
-	import net.avdw.number.normalize;
-	import net.avdw.number.rangeBetween;
-	import net.avdw.dice.roll;
-	import net.avdw.random.randomRealFemaleName;
-	import net.avdw.random.randomRealLastName;
-	import net.avdw.random.randomRealMaleName;
-	import net.avdw.random.randomScenario;
-	import net.avdw.test.testEqual;
-	import net.avdw.test.testNotEqual;
-	import net.avdw.test.testSmallerThan;
+	import net.avdw.color.*;
+	import net.avdw.debug.*;
+	import net.avdw.interp.*;
+	import net.avdw.number.*;
+	import net.avdw.dice.*;
+	import net.avdw.random.*;
+	import net.avdw.test.*;
+	import net.avdw.demo.*;
 	
 	public class Driver extends Sprite
 	{
@@ -52,7 +44,7 @@ package
 			addChild(demoContainer);
 			
 			var selectorWidth:int = 200;
-			var demoSelector:ComboBox = new ComboBox(this, ((stage.stageWidth - selectorWidth) / 2), 5, "please select demo", [FilterToSepiaDemo, FilterToGrayDemo, FilterToColorDemo, CollisionDemo, CenterSlideFxDemo, CheckerboardDemo]);
+			var demoSelector:ComboBox = new ComboBox(this, ((stage.stageWidth - selectorWidth) / 2), 5, "please select demo", [FilterToSepiaDemo, FilterToGrayDemo, FilterToColorDemo, CollisionDemo, CenterSlideFxDemo, CheckerboardDemo, HSLColorPaletteDemo, HSVColorPaletteDemo, RGBColorPaletteDemo]);
 			demoSelector.width = selectorWidth;
 			demoSelector.addEventListener(Event.SELECT, showDemo);
 			addChild(demoSelector);
