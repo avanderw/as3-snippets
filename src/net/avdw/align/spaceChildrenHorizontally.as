@@ -10,7 +10,10 @@ package net.avdw.align
 			for (var i:int = 0; i < container.numChildren; i++)
 				children.push(container.getChildAt(i));
 			
-			spaceHorizontally(children, spacingValues);
+			var args:Array = [children];
+			args = args.concat(spacingValues);
+			
+			spaceHorizontally.apply(null, args);
 		}
 	}
 }

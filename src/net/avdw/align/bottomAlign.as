@@ -2,7 +2,7 @@ package net.avdw.align
 {
 	import flash.display.Stage;
 	
-	public function rightAlignHorizontally(objectsToPosition:Array, withinObject:Object = null):void
+	public function bottomAlign(objectsToPosition:Array, withinObject:Object = null):void
 	{
 		if (!objectsToPosition || objectsToPosition.length == 0)
 			return;
@@ -10,7 +10,7 @@ package net.avdw.align
 		var tmpWithinObject:Object;
 		for (var i:int = 0; i < objectsToPosition.length; i++)
 		{
-			if (!objectsToPosition[i] || !objectsToPosition[i].hasOwnProperty("width") || !objectsToPosition[i].hasOwnProperty("x"))
+			if (!objectsToPosition[i] || !objectsToPosition[i].hasOwnProperty("height") || !objectsToPosition[i].hasOwnProperty("y"))
 				continue;
 			
 			if (!withinObject)
@@ -20,9 +20,9 @@ package net.avdw.align
 					continue;
 			
 			if (withinObject is Stage)
-				objectsToPosition[i].x = withinObject.stageWidth - objectsToPosition[i].width;
+				objectsToPosition[i].y = withinObject.stageHeight - objectsToPosition[i].height;
 			else
-				objectsToPosition[i].x = tmpWithinObject.x + tmpWithinObject.width - objectsToPosition[i].width;
+				objectsToPosition[i].y = tmpWithinObject.y + tmpWithinObject.height - objectsToPosition[i].height;
 		}
 	}
 }

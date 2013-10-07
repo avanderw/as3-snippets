@@ -4,9 +4,9 @@ package net.avdw.generate
 	import flash.display.GradientType;
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
-	import net.avdw.color.Gradient;
+	import net.avdw.color.GradientEnum;
 	
-	public function linearGradient(width:int, height:int, gradient:Gradient, angle:Number = Math.PI * 0.25):BitmapData
+	public function linearGradient(width:int, height:int, gradient:GradientEnum, angle:Number = Math.PI * 0.25):BitmapData
 	{
 		var matrix:Matrix = new Matrix();
 		matrix.createGradientBox(width, height, angle);

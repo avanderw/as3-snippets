@@ -1,4 +1,4 @@
-package net.avdw.enum
+package net.avdw.align
 {
 	public class AlignEnum
 	{

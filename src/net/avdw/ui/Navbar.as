@@ -14,12 +14,12 @@ package net.avdw.ui
 	import net.avdw.align.centerAlignChildrenVertically;
 	import net.avdw.align.centerAlignHorizontally;
 	import net.avdw.align.centerAlignVertically;
-	import net.avdw.align.rightAlignHorizontally;
+	import net.avdw.align.rightAlign;
 	import net.avdw.align.spaceChildrenHorizontally;
 	import net.avdw.align.spaceHorizontally;
-	import net.avdw.color.Gradient;
+	import net.avdw.color.GradientEnum;
 	import net.avdw.display.addChildren;
-	import net.avdw.enum.AlignEnum;
+	import net.avdw.align.AlignEnum;
 	import net.avdw.generate.linearGradient;
 	
 	public class Navbar extends Sprite
@@ -29,11 +29,11 @@ package net.avdw.ui
 		private const rightContent:Sprite = new Sprite();
 		
 		private var _height:int;
-		private var gradient:Gradient;
+		private var gradient:GradientEnum;
 		
-		public function Navbar(gradient:Gradient = null, height:int = 40)
+		public function Navbar(gradient:GradientEnum = null, height:int = 40)
 		{
-			this.gradient = gradient == null ? Gradient.NAVBAR_GREEN : gradient;
+			this.gradient = gradient == null ? GradientEnum.NAVBAR_GREEN : gradient;
 			this._height = height;
 			
 			if (stage)
@@ -58,7 +58,7 @@ package net.avdw.ui
 			centerAlignChildrenVertically([leftContent, centerContent, rightContent]);
 			centerAlignVertically([leftContent, centerContent, rightContent]);
 			centerAlignHorizontally([centerContent]);
-			rightAlignHorizontally([rightContent]);
+			rightAlign([rightContent]);
 			
 			leftContent.x = 5;
 			rightContent.x = rightContent.x > 5 ? rightContent.x - 5 : 0;
