@@ -5,7 +5,7 @@ package net.avdw.demo
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import net.avdw.generate.generateCheckerboard;
+	import net.avdw.generate.checkerboard;
 	
 	import net.avdw.align.centerAlignHorizontally;
 	import net.avdw.align.spaceVertically;
@@ -52,7 +52,7 @@ package net.avdw.demo
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
 			
-			addChildAt(new Bitmap(generateCheckerboard(stage.stageWidth, stage.stageHeight)), 0);
+			addChildAt(new Bitmap(checkerboard(stage.stageWidth, stage.stageHeight)), 0);
 			
 			cardContainer.x = stage.stageWidth >> 1;
 			cardContainer.y = stage.stageHeight >> 1;

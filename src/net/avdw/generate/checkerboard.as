@@ -3,7 +3,7 @@ package net.avdw.generate
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
 	
-	public function generateCheckerboard(width:int, height:int, cellWidth:int = 32, cellHeight:int = 32, color1:uint = 0xffe7e6e6, color2:uint = 0xffd9d5d5):BitmapData
+	public function checkerboard(width:int, height:int, cellWidth:int = 32, cellHeight:int = 32, color1:uint = 0xffe7e6e6, color2:uint = 0xffd9d5d5):BitmapData
 	{
 		var bitmapData:BitmapData = new BitmapData(width, height);
 		var numRows:int = Math.ceil(height / cellHeight);
