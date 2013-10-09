@@ -45,12 +45,16 @@ package
 			
 			SWFProfiler.init(stage, this);
 			addChild(new Bitmap(linearGradient(stage.stageWidth, stage.stageHeight, GradientEnum.BG_DARK)));
+			addChild(new Output());
+			Output.trace("hi");
+			Output.trace("there");
 			
-			statContainer = createRectangle(stage.stageWidth, 20, ColorEnum.WHITE.value);
+			statContainer = createRectangle(stage.stageWidth, 18, ColorEnum.WHITE.value);
 			addChild(statContainer);
 			fpsMeter = new Label(statContainer, 0, 0, "FPS: 00");
 			memMeter = new Label(statContainer, 0, 0, "MEM: 000.00");
 			spaceChildrenHorizontally([statContainer]);
+			
 			addEventListener(Event.ENTER_FRAME, updateStats);
 			
 			var list:List = new List(this, 0, 0, demos);

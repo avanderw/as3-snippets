@@ -23,6 +23,9 @@ package net.avdw.align
 				objectsToPosition[i].y = withinObject.stageHeight - objectsToPosition[i].height;
 			else
 				objectsToPosition[i].y = tmpWithinObject.y + tmpWithinObject.height - objectsToPosition[i].height;
+				
+			trace(tmpWithinObject, tmpWithinObject.y, tmpWithinObject.height);
+			trace(objectsToPosition[i], objectsToPosition[i].y, objectsToPosition[i].height);
 		}
 	}
 }
