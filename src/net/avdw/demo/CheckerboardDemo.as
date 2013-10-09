@@ -4,7 +4,7 @@ package net.avdw.demo
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import net.avdw.generate.generateCheckerboard;
+	import net.avdw.generate.checkerboard;
 	
 	/**
 	 * ...
@@ -25,7 +25,7 @@ package net.avdw.demo
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			addChild(new Bitmap(generateCheckerboard(stage.stageWidth, stage.stageHeight)));
+			addChild(new Bitmap(checkerboard(stage.stageWidth, stage.stageHeight)));
 		}
 	
 	}

@@ -8,10 +8,10 @@ package net.avdw.textfield
 	/**
 	 * Create a <code>TextField</code> instance and return it.
 	 */
-	public function createTextField(str:String, size:Number = 9, color:uint = 0, x:Number = 0, y:Number = 0, width:Number = 200, height:Number = 20, multiline:Boolean = false, font:String = "Verdana", autoSize:String = TextFieldAutoSize.LEFT, embedFonts:Boolean = false, selectable:Boolean = false, css:StyleSheet = null):TextField
+	public function createTextField(str:String, size:Number = 9, color:uint = 0, autoSize:String = TextFieldAutoSize.LEFT, bold:Boolean = false, x:Number = 0, y:Number = 0, width:Number = 200, height:Number = 20, multiline:Boolean = false, font:String = "Verdana", embedFonts:Boolean = false, selectable:Boolean = false, css:StyleSheet = null):TextField
 	{
 		var tf:TextField = new TextField();
-		var fmt:TextFormat = new TextFormat(font, size, color);
+		var fmt:TextFormat = new TextFormat(font, size, color, bold);
 		tf.x = x;
 		tf.y = y;
 		tf.width = width;
