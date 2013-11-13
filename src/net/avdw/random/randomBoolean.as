@@ -11,7 +11,5 @@ package net.avdw.random
 		{
 			return Math.random() < chance;
 		}
-		
-	}
 
 }
