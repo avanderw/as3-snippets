@@ -7,6 +7,11 @@ package net.avdw.card
 	 */
 	public class Card
 	{
+		static public const CLUB:int = 0;
+		static public const DIAMOND:int = 1;
+		static public const HEART:int = 2;
+		static public const SPADE:int = 3;
+		
 		/**
 		 * suit = card / 13;
 		 * 0..3 - 0 = clubs, 1 = diamonds, 2 = hearts, 3 = spades
@@ -74,16 +79,16 @@ package net.avdw.card
 			
 			switch (suit)
 			{
-				case 0: 
+				case Card.CLUB: 
 					str += "\u2663";
 					break;
-				case 1: 
+				case Card.DIAMOND: 
 					str += "\u2666";
 					break;
-				case 2: 
+				case Card.HEART: 
 					str += "\u2665";
 					break;
-				case 3: 
+				case Card.SPADE: 
 					str += "\u2660";
 					break;
 				default: 

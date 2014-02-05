@@ -1,8 +1,6 @@
 package net.avdw.align
 {
 	import flash.text.TextField;
-	import utils.object.inspect;
-	import utils.object.toString;
 	
 	/**
 	 * Will space a collection of items underneath the first element with or without spacing gaps.
@@ -43,7 +41,6 @@ package net.avdw.align
 			else
 			{ // space horizontally with no space
 				items[i].x = int(items[(i - 1)].x + items[(i - 1)].width);
-				trace(items[i].x);
 			}
 		}
 	}

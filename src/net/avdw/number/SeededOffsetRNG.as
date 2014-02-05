@@ -7,7 +7,7 @@ package net.avdw.number
 		private var maxOffset:Number;
 		private var minOffset:Number;
 		private var seededRNG:SeededRNG;
-		private var baseNumber:Number;
+		public var baseNumber:Number;
 		private var inBothDirections:Boolean;
 		
 		public function SeededOffsetRNG(baseNumber:Number, minOffset:Number, maxOffset:Number = NaN, seed:uint = NaN, inBothDirections:Boolean = true)

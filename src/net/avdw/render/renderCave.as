@@ -2,12 +2,14 @@ package net.avdw.render
 {
 	import flash.display.BitmapData;
 	
-	public function renderCave(map:Vector.<Vector.<int>>):BitmapData
+	public function renderCave(map:Vector.<Vector.<int>>, bmpData:BitmapData = null):BitmapData
 	{
 		var height:int = map.length;
 		var width:int = map[0].length;
 		
-		var bmpData:BitmapData = new BitmapData(map[0].length, map.length, true, 0);
+		if (bmpData == null)
+			bmpData = new BitmapData(map[0].length, map.length, true, 0);
+			
 		for (var y:int = 0; y < height; y++)
 		{
 			for (var x:int = 0; x < width; x++)
@@ -23,22 +25,20 @@ package net.avdw.render
 						if (xi == x && yi == y)
 							continue;
 						
-						wallCount += map[yi][xi];
+						wallCount += map[yi][xi] == 1 ? 1 : 0;
 					}
 				}
 				
-				if (map[y][x] != 0 && wallCount != 8)
-				{
-					bmpData.setPixel32(x, y, (0xFF << 24) | 0xE0 * ((wallCount + 3) / 10) << 16 | 0x1010);
-				}
+				if (map[y][x] == 3)
+					bmpData.setPixel32(x, y, 0xFF614126); // stalagmite / stalactite
+				else if (map[y][x] == 2)
+					bmpData.setPixel32(x, y, 0xFF3030F9); // water
 				else if (map[y][x] == 0)
-				{
-					bmpData.setPixel32(x, y, 0xFFE0E0E0);
-				}
+					bmpData.setPixel32(x, y, 0xFFE0E0E0); // floor
+				else if (map[y][x] == 1 && wallCount != 8)
+					bmpData.setPixel32(x, y, (0xFF << 24) | 0xE0 * ((wallCount + 3) / 10) << 16 | 0x1010); // wall
 				else
-				{
-					bmpData.setPixel32(x, y, 0xFF303030);
-				}
+					bmpData.setPixel32(x, y, 0xFF303030); // surround
 			}
 		}
 		return bmpData;

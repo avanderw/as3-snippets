@@ -27,6 +27,7 @@ package net.avdw.card
 			{
 				drawCards.push(cards.splice(randomInteger(cards.length), 1)[0]);
 			}
+			
 			return drawCards;
 		}
 	

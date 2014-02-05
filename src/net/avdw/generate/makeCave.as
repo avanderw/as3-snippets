@@ -1,8 +1,23 @@
 package net.avdw.generate
 {
 	import net.avdw.array.createIntVectorMatrix;
+	import net.avdw.cellular.calcNumWallsNStepsFromPoint;
+	import net.avdw.cellular.fillGapsAndSmooth;
+	import net.avdw.cellular.smoothEdges;
 	import net.avdw.number.SeededRNG;
-	public function makeCave(width:int, height:int = 0, smoothness:int = 4, seed:int = 0):Vector.<Vector.<int>>
+	
+	/**
+	 * http://roguebasin.roguelikedevelopment.org/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels
+	 * 
+	 * @param	width
+	 * @param	height
+	 * @param	smoothness
+	 * @param	density (continuous) ? .35 : .5
+	 * @param	continuous reduces isolated caves
+	 * @param	seed
+	 * @return
+	 */
+	public function makeCave(width:int, height:int = 0, smoothness:int = 4, density:Number = 0.35, continuous:Boolean = true, seed:int = 0):Vector.<Vector.<int>>
 	{
 		seed = seed == 0 ? Math.random() * int.MAX_VALUE : seed;
 		height = height == 0 ? width : height;
@@ -13,41 +28,14 @@ package net.avdw.generate
 		{
 			var row:Vector.<int> = new Vector.<int>();
 			for (var x:int = 0; x < width; x++)
-				row.push(rnd.bit());
+				row.push(rnd.bit(density));
 			map.push(row);
 		}
 		
-		for (var i:int = 0; i < smoothness; i++)
-		{
-			var mapBuffer:Vector.<Vector.<int>> = createIntVectorMatrix(height, width, 0);
-			for (y = 0; y < height; y++)
-			{
-				for (x = 0; x < width; x++)
-				{
-					var xRange:Object = {low: Math.max(0, x - 1), high: Math.min(width - 1, x + 1)};
-					var yRange:Object = {low: Math.max(0, y - 1), high: Math.min(height - 1, y + 1)};
-					var wallCount:int = 0;
-					
-					for (var xi:int = xRange.low; xi <= xRange.high; xi++)
-					{
-						for (var yi:int = yRange.low; yi <= yRange.high; yi++)
-						{
-							if (xi == x && yi == y)
-								continue;
-							
-							wallCount += map[yi][xi];
-						}
-					}
-					
-					var isWallWith4Walls:Boolean = map[y][x] == 1 && wallCount == 4;
-					var hasMoreThanFiveWalls:Boolean = wallCount >= 5;
-					var isBorder:Boolean = x == 0 || y == 0 || x == width - 1 || y == height - 1;
-					
-					mapBuffer[y][x] = (isWallWith4Walls || hasMoreThanFiveWalls || isBorder) ? 1 : 0;
-				}
-			}
-			map = mapBuffer;
-		}
+		if (continuous)
+			fillGapsAndSmooth(map, smoothness);
+		
+		smoothEdges(map, smoothness);
 		
 		return map;
 	}
